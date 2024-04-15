@@ -29,14 +29,14 @@ public class ChampionsJdbcRepository implements ChampionsRepository {
     }
     @Override
     public List<Champions> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+        return jdbcTemplate.query("SELECT * FROM CHAMPIONS", rowMapper);
     }
 
     @Override
     public Optional<Champions> findOne(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findOne'");
+        String sql = "SELECT * FROM CHAMPIONS WHERE ID = ?";
+        Champions champion = jdbcTemplate.queryForObject(sql, rowMapper, id);
+        return Optional.ofNullable(champion);
     }
 
 }
